@@ -1,14 +1,14 @@
 {
     "version": "0.2.0",
-    "configurations": [
+    "configurations": [        
         {
             "name": ".NET Core Launch (console)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/bin/Debug/net6.0/AdventOfCode.dll",
+            "program": "${workspaceFolder}/src/csharp/bin/Debug/net6.0/AdventOfCode.dll",
             "args": [],
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/src/csharp",
             "console": "integratedTerminal",
             "stopAtEntry": false
         },

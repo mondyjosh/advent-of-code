@@ -21,7 +21,7 @@ static class Solution
 
         // TODO: Assemble full path dynamically based on year/day (maybe part?)
         var inputPath = config.GetValue<string>("InputPath");
-        var fullpath = $"{inputPath}/2015/day01.txt";
+        var fullpath = $"{inputPath}/2015/day01_input.txt";
 
         using (var streamReader = new StreamReader(fullpath))
             return streamReader.ReadToEnd();
