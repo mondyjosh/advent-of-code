@@ -1,19 +1,8 @@
-namespace AdventOfCode.Year2015.Day01;
-
 using Microsoft.Extensions.Configuration;
 
-// TODO: Implement SolutionBase
-static class Solution
+public abstract class SolutionBase
 {
-    public static void Solve()
-    {
-        // TODO: Solve.
-        // TODO: Build unit tests based off of demo inputs.
-        Console.WriteLine($"Puzzle input: {LoadInput()}");
-    }
-
-    // TODO: Move to SolutionBase
-    static string LoadInput()
+    public static string LoadInput()
     {
         var config = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json")
