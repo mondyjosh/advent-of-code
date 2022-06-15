@@ -4,39 +4,66 @@ using System.Linq;
 
 class Day02Solution : SolutionBase
 {
-    public override int SolvePart1(string input) => CalculateRightRectangularPrism(input);
+    public override int SolvePart1(string input) => CalculateTotalWrappingPaperArea(input);
 
-    public override int SolvePart2(string input) => 2;
+    public override int SolvePart2(string input) => CalculateTotalRibbonLength(input);
 
-    private int CalculateRightRectangularPrism(string input)
+    private int CalculateTotalWrappingPaperArea(string input)
     {
-        var totalSquareFeet = 0;
-        var inputArray = input.SplitByNewline();
+        var presentDimensionSets = ExtractDimensions(input);
+        var totalArea = 0;
 
-        var dimensionsArray = inputArray
+        foreach (var presentDimensions in presentDimensionSets)
+            totalArea += CalculateWrappingPaperTotal(presentDimensions);
+
+        return totalArea;
+    }
+
+    private int CalculateTotalRibbonLength(string input)
+    {
+        var presentDimensionSets = ExtractDimensions(input);
+        var totalLength = 0;
+
+        foreach (var presentDimensions in presentDimensionSets)
+            totalLength += CalculateRibbonTotal(presentDimensions);
+
+        return totalLength;
+    }
+
+    private int CalculateWrappingPaperTotal(int[] dimensions)
+    {
+        var smallestSides = GetSmallestDimensions(dimensions, 2);
+
+        var paperWrapArea = CalculateRightRectangularPrismArea(dimensions[0], dimensions[1], dimensions[2]);
+        var paperSlackArea = CalculateArea(smallestSides[0], smallestSides[1]);
+
+        return paperWrapArea + paperSlackArea;
+    }
+
+    private int CalculateRibbonTotal(int[] dimensions)
+    {
+        var smallestSides = GetSmallestDimensions(dimensions, 2);
+
+        var wrapLength = CalculateRectanglePerimeter(smallestSides[0], smallestSides[1]);
+        var bowLength = CalculateCubicArea(dimensions[0], dimensions[1], dimensions[2]);
+
+        return wrapLength + bowLength;
+    }
+
+    private static IEnumerable<int[]> ExtractDimensions(string input) =>
+        input.SplitByNewline()
             .Select(input => input.Split("x"))
-            .Select(dimension => Array.ConvertAll(dimension, int.Parse));        
+            .Select(dimension => Array.ConvertAll(dimension, int.Parse));
 
-        foreach (var dimensionSet in dimensionsArray)
-        {
-            totalSquareFeet += CalculatePresentWrappingPaperTotal(dimensionSet);
-        }
+    private static int[] GetSmallestDimensions(int[] dimensions, int count) =>
+        dimensions.OrderBy(d => d).Take(count).ToArray();
 
-        return totalSquareFeet;
-    }
-
-    private int CalculatePresentWrappingPaperTotal(int[] dimensions)
-    {        
-        var smallestSide = dimensions.OrderBy(d => d).Take(2).ToArray();
-
-        var area = CalculateRightRectangularPrismArea(dimensions[0], dimensions[1], dimensions[2]);
-        var slack = CalculateArea(smallestSide[0], smallestSide[1]);
-
-        return area + slack;
-    }
-
-    private int CalculateRightRectangularPrismArea(int length, int width, int height) =>
+    private static int CalculateRightRectangularPrismArea(int length, int width, int height) =>
         (2 * length * width) + (2 * width * height) + (2 * height * length);
 
-    private int CalculateArea(int length, int width) => length * width;
+    private static int CalculateArea(int length, int width) => length * width;
+
+    private static int CalculateCubicArea(int length, int width, int height) => length * width * height;
+
+    private static int CalculateRectanglePerimeter(int length, int width) => 2 * length + 2 * width;
 }
