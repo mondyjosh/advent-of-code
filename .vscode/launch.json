@@ -8,8 +8,8 @@
             "request": "launch",
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/src/csharp/AdventOfCode/bin/Debug/net6.0/AdventOfCode.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/src/csharp/AdventOfCode",
+            "args": ["2015", "2"],
+            "cwd": "${workspaceFolder}/src/csharp",
             "console": "integratedTerminal",
             "stopAtEntry": false
         },

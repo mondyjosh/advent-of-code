@@ -1,21 +1,21 @@
-namespace AdventOfCode.Year2015.Day01;
+namespace AdventOfCode.Year2015;
 
-static class Solution
+class Day01Solution : SolutionBase
 {
-    public static int SolvePart1(string input) => GetFloor(input);
+    public override int SolvePart1(string input) => GetFloor(input);
 
-    public static int SolvePart2(string input) => GetBasementEntryCharacterPosition(input);
+    public override int SolvePart2(string input) => GetBasementEntryCharacterPosition(input);
 
     private static int GetFloor(string input)
-    {
+    {        
         var upCount = input.Count(input => input == UpSymbol);
         var downCount = input.Count(input => input == DownSymbol);
 
         return upCount - downCount;
     }
-
+    
     private static int GetBasementEntryCharacterPosition(string input)
-    {        
+    {
         var floor = GroundFloor;
         var index = 0;
 
@@ -28,7 +28,7 @@ static class Solution
             else
                 floor--;
 
-            if (floor < GroundFloor)
+            if (floor < GroundFloor) 
                 break;
         }
 
