@@ -36,5 +36,5 @@ public abstract class SolutionBase
         }
     }
 
-    public static string[] SplitInputByNewline(string input) => input.Split("\r\n", StringSplitOptions.RemoveEmptyEntries);
+    public static string[] SplitInputByNewline(string input) => input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 }
