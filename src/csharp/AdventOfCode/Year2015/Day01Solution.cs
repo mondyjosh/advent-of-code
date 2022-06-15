@@ -6,6 +6,14 @@ class Day01Solution : SolutionBase
 
     public override int SolvePart2(string input) => GetBasementEntryCharacterPosition(input);
 
+    private static int GetFloor(string input)
+    {        
+        var upCount = input.Count(input => input == UpSymbol);
+        var downCount = input.Count(input => input == DownSymbol);
+
+        return upCount - downCount;
+    }
+    
     private static int GetBasementEntryCharacterPosition(string input)
     {
         var floor = GroundFloor;
@@ -20,19 +28,11 @@ class Day01Solution : SolutionBase
             else
                 floor--;
 
-            if (floor < GroundFloor)
+            if (floor < GroundFloor) 
                 break;
         }
 
         return index;
-    }
-
-    private static int GetFloor(string input)
-    {
-        var upCount = input.Count(input => input == UpSymbol);
-        var downCount = input.Count(input => input == DownSymbol);
-
-        return upCount - downCount;
     }
 
     private const char UpSymbol = '(';

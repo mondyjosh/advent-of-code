@@ -13,8 +13,11 @@ public abstract class SolutionBase
             .AddJsonFile("appsettings.json")
             .Build();
 
-        var inputPath = config.GetValue<string>("InputPath");
-        var filePath = $"{inputPath}/{year}/day{day.ToString("D2")}_input.txt";
+        var inputFilePathTemplate = config.GetValue<string>("InputFilePathTemplate");
+
+        var filePath = inputFilePathTemplate
+            .Replace("{year}", year.ToString())
+            .Replace("{day}", day.ToString("D2"));
 
         try
         {
@@ -24,12 +27,14 @@ public abstract class SolutionBase
         catch (Exception ex)
         {
             var foregroundColor = Console.ForegroundColor;
-            
+
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Error.WriteLine($"\r\nCan't help Santa!\r\nAn exception occurred loading input: {ex.Message}\r\n");
+            Console.Error.WriteLine(ex);
             Console.ForegroundColor = foregroundColor;
 
             return string.Empty;
         }
     }
+
+    public static string[] SplitInputByNewline(string input) => input.Split("\r\n", StringSplitOptions.RemoveEmptyEntries);
 }
