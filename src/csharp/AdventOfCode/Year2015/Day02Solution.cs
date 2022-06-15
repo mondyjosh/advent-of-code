@@ -10,13 +10,16 @@ class Day02Solution : SolutionBase
 
     private int CalculateRightRectangularPrism(string input)
     {
-        var inputArray = SplitInputByNewline(input);
-        var dimensionsArray = inputArray.Select(input => input.Split("x"));
         var totalSquareFeet = 0;
+        var inputArray = input.SplitByNewline();
 
-        foreach (var dimensionStrings in dimensionsArray)
-        {                    
-            totalSquareFeet += CalculatePresentWrappingPaperTotal(Array.ConvertAll(dimensionStrings, int.Parse));
+        var dimensionsArray = inputArray
+            .Select(input => input.Split("x"))
+            .Select(dimension => Array.ConvertAll(dimension, int.Parse));        
+
+        foreach (var dimensionSet in dimensionsArray)
+        {
+            totalSquareFeet += CalculatePresentWrappingPaperTotal(dimensionSet);
         }
 
         return totalSquareFeet;

@@ -10,15 +10,15 @@ public class Day02SolutionTests
     }
 
     [Theory]
-    [MemberData(nameof(GetDimensions))]
-    public void SolvePart1_WithMemberData_OutputExpectedArea(string input, int expected)
+    [MemberData(nameof(GetWrappingPaperDimensions))]
+    public void SolvePart1_WithMemberData_OutputExpectedTotalArea(string input, int expected)
     {        
         var actual = _solution.SolvePart1(input);
 
         Assert.Equal(expected, actual);
     }
 
-    public static IEnumerable<object[]> GetDimensions()
+    public static IEnumerable<object[]> GetWrappingPaperDimensions()
     {
         yield return new object[] { "2x3x4", 58 };
         yield return new object[] { "1x1x10", 43 };
