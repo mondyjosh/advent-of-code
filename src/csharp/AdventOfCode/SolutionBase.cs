@@ -8,7 +8,7 @@ public abstract class SolutionBase
 
     public static string LoadInput(int year = 2015, int day = 1)
     {
-        // If we need more config, move IConfiguration around via DI
+        // If more config is eventually, pass IConfiguration around via DI
         var config = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json")
             .Build();

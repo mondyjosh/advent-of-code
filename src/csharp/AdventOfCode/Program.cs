@@ -13,7 +13,7 @@ var input = SolutionBase.LoadInput(year, day);
 if (input.Length > 0)
 {
     // TODO: Dependency injection based on year-day input combo (named instances)
-    var solution = new Day02Solution();
+    var solution = new Day03Solution();
     var part1Solution = solution.SolvePart1(input);
     var part2Solution = solution.SolvePart2(input);
 

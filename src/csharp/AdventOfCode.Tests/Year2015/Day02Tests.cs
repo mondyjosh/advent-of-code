@@ -18,9 +18,9 @@ public class Day02SolutionTests
         Assert.Equal(expected, actual);
     }
 
-        [Theory]
+    [Theory]
     [MemberData(nameof(GetRibbonLengths))]
-    public void SolvePart1_WithMemberData_OutputExpectedTotalLength(string input, int expected)
+    public void SolvePart2_WithMemberData_OutputExpectedTotalLength(string input, int expected)
     {
         var actual = _solution.SolvePart2(input);
 

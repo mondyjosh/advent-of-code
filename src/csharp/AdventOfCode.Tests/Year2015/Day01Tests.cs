@@ -12,8 +12,7 @@ public class Day01SolutionTests
     [Theory]
     [MemberData(nameof(GetFloors))]
     public void SolvePart1_WithMemberData_OutputExpectedFloor(string input, int expected)
-    {
-        
+    {        
         var actual = _solution.SolvePart1(input);        
 
         Assert.Equal(expected, actual);
