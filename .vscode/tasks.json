@@ -7,15 +7,11 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/csharp/AdventOfCode/AdventOfCode.csproj",
+                "${workspaceFolder}/csharp/src/AdventOfCode.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "problemMatcher": "$msCompile",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+            "problemMatcher": "$msCompile"
         },
         {
             "label": "publish",
@@ -23,27 +19,11 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/src/csharp/AdventOfCode/AdventOfCode.csproj",
+                "${workspaceFolder}/csharp/src/AdventOfCode.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "test",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "test",
-                "${workspaceFolder}/src/csharp/AdventOfCode.Tests/AdventOfCode.Tests.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile",
-            "group": {
-                "kind": "test",
-                "isDefault": true
-            }
         },
         {
             "label": "watch",
@@ -53,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/src/csharp/AdventOfCode/AdventOfCode.csproj"
+                "${workspaceFolder}/csharp/src/AdventOfCode.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

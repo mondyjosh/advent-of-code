@@ -44,5 +44,5 @@ public class Day02SolutionTests
         yield return new object[] { "1x1x10\n1x1x10", 28 };
     }
 
-    private readonly SolutionBase _solution;
+    private readonly InputHandler _solution;
 }

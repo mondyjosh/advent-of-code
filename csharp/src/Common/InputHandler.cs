@@ -2,12 +2,8 @@ namespace AdventOfCode.Common;
 
 using Microsoft.Extensions.Configuration;
 
-public abstract class SolutionBase
+public static class InputHandler
 {
-    public abstract int SolvePart1(string input);
-
-    public abstract int SolvePart2(string input);
-
     public static string LoadInput(int year = 2015, int day = 1)
     {
         // If more config is eventually, pass IConfiguration around via DI

@@ -2,11 +2,11 @@ namespace AdventOfCode.Year2015;
 
 using System.Linq;
 
-class Day02Solution : SolutionBase
+class Day02Solution : ISolution
 {
-    public override int SolvePart1(string input) => CalculateTotalWrappingPaperArea(input);
+    public int SolvePart1(string input) => CalculateTotalWrappingPaperArea(input);
 
-    public override int SolvePart2(string input) => CalculateTotalRibbonLength(input);
+    public int SolvePart2(string input) => CalculateTotalRibbonLength(input);
 
     private int CalculateTotalWrappingPaperArea(string input)
     {

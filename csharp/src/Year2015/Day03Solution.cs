@@ -1,10 +1,10 @@
 namespace AdventOfCode.Year2015;
 
-class Day03Solution : SolutionBase
+class Day03Solution : ISolution
 {
-    public override int SolvePart1(string input) => GetSantaHousesVisited(input);
+    public int SolvePart1(string input) => GetSantaHousesVisited(input);
 
-    public override int SolvePart2(string input) => GetSantaPlusRoboSantaHousesVisited(input);
+    public int SolvePart2(string input) => GetSantaPlusRoboSantaHousesVisited(input);
 
     private static int GetSantaHousesVisited(string input)
     {
