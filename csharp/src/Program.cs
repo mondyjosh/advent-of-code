@@ -1,24 +1,128 @@
-﻿// TODO: Implement snazzy System.CommandLine package for argument handling.
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-using AdventOfCode.Year2015;
+using IHost host = Host.CreateDefaultBuilder(args)
+    .ConfigureServices((_, services) =>
+        services.AddTransient<ITransientOperation, DefaultOperation>()
+            .AddScoped<IScopedOperation, DefaultOperation>()
+            .AddSingleton<ISingletonOperation, DefaultOperation>()
+            .AddTransient<OperationLogger>())
+    .Build();
 
-int.TryParse(args[0], out int year);
-int.TryParse(args[1], out int day);
+ExemplifyScoping(host.Services, "Scope 1");
+ExemplifyScoping(host.Services, "Scope 2");
 
-Console.WriteLine($"Helping Santa on {year}.12.{day}...\r\n");
+await host.RunAsync();
 
-var input = SolutionBase.LoadInput(year, day);
-
-if (input.Length > 0)
+static void ExemplifyScoping(IServiceProvider services, string scope)
 {
-    // TODO: Dependency injection based on year-day input combo (named instances)
-    var solution = new Day03Solution();
-    var part1Solution = solution.SolvePart1(input);
-    var part2Solution = solution.SolvePart2(input);
+    using IServiceScope serviceScope = services.CreateScope();
+    IServiceProvider provider = serviceScope.ServiceProvider;
 
-    Console.WriteLine($"Part 1 solution: {part1Solution}");
-    Console.WriteLine($"Part 2 solution: {part2Solution}");
+    OperationLogger logger = provider.GetRequiredService<OperationLogger>();
+    logger.LogOperations($"{scope}-Call 1 .GetRequiredService<OperationLogger>()");
+
+    Console.WriteLine("...");
+
+    logger = provider.GetRequiredService<OperationLogger>();
+    logger.LogOperations($"{scope}-Call 2 .GetRequiredService<OperationLogger>()");
+
+    Console.WriteLine();
 }
-else {
-    Console.WriteLine("\r\nNo input detected. Hurry and save Christmas!");
+// using Microsoft.Extensions.DependencyInjection;
+
+// // TODO: Implement snazzy System.CommandLine package for argument handling.
+
+// var services = new ServiceCollection();
+
+// ConfigureServices(services);
+
+// int.TryParse(args[0], out int year);
+// int.TryParse(args[1], out int day);
+
+// // This is just gross. Any other way to handle this chain?
+// services
+//     .AddSingleton<Executor, Executor>()
+//     ?.BuildServiceProvider()
+//     ?.GetService<Executor>()
+//     ?.Execute(year, day);
+
+// static void ConfigureServices(IServiceCollection services)
+// {    
+//     // TODO: Configure keyed instances dynamically based off of naming conventions.
+//     services
+//         .AddSingleton<AdventOfCode.ISolution, AdventOfCode.Year2015.Day03Solution>();
+// }
+
+// class Executor
+// {
+//     public Executor(AdventOfCode.ISolution solution)
+//     {
+//         _solution = solution;
+//     }
+
+//     public void Execute(int year, int day)
+//     {
+//         var input = InputHandler.LoadInput(year, day);
+
+//         if (!string.IsNullOrEmpty(input))
+//         {
+//             Console.WriteLine($"Part 1 solution: {_solution.SolvePart1(input)}");
+//             Console.WriteLine($"Part 2 solution: {_solution.SolvePart2(input)}");
+//         }
+//         else
+//         {
+//             Console.WriteLine("\r\nNo input detected. Hurry and save Christmas!");
+//         }
+//     }
+//     private readonly AdventOfCode.ISolution _solution;
+// }
+
+
+public interface IOperation
+{
+    string OperationId { get; }
+}
+
+public interface ITransientOperation : IOperation
+{}
+
+public interface IScopedOperation : IOperation
+{}
+
+public interface ISingletonOperation : IOperation
+{}
+
+public class DefaultOperation :
+    ITransientOperation,
+    IScopedOperation,
+    ISingletonOperation
+{
+    public string OperationId { get; } = "the operation, yo"; //NewGuid().ToString()[^4..];
+}
+
+public class OperationLogger
+{
+    private readonly ITransientOperation _transientOperation;
+    private readonly IScopedOperation _scopedOperation;
+    private readonly ISingletonOperation _singletonOperation;
+
+    public OperationLogger(
+        ITransientOperation transientOperation,
+        IScopedOperation scopedOperation,
+        ISingletonOperation singletonOperation) =>
+        (_transientOperation, _scopedOperation, _singletonOperation) =
+            (transientOperation, scopedOperation, singletonOperation);
+
+    public void LogOperations(string scope)
+    {
+        LogOperation(_transientOperation, scope, "Always different");
+        LogOperation(_scopedOperation, scope, "Changes only with scope");
+        LogOperation(_singletonOperation, scope, "Always the same");
+    }
+
+    private static void LogOperation<T>(T operation, string scope, string message)
+        where T : IOperation =>
+        Console.WriteLine(
+            $"{scope}: {typeof(T).Name,-19} [ {operation.OperationId}...{message,-23} ]");
 }
