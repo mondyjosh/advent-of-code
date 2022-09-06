@@ -47,5 +47,5 @@ public class Day01SolutionTests
         yield return new object[] { "()())", 5 };
     }
 
-    private readonly InputHandler _solution;
+    private readonly ISolution _solution;
 }
