@@ -5,6 +5,7 @@ using Autofac;
 // TODO: Implement snazzy System.CommandLine package for argument handling.
 var builder = new ContainerBuilder();
 
+// TODO: Don't rely on possibly null-referenced t.FullName...
 builder.RegisterAssemblyTypes(typeof(ISolution).GetTypeInfo().Assembly)
     .Named(t => t.FullName, typeof(ISolution));
 
