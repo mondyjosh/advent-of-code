@@ -42,5 +42,5 @@ public class Day03SolutionTests
         yield return new object[] { "^v^v^v^v^v", 11 };
     }
 
-    private readonly SolutionBase _solution;
+    private readonly ISolution _solution;
 }

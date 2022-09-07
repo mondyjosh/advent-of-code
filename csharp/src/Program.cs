@@ -1,24 +1,34 @@
-﻿// TODO: Implement snazzy System.CommandLine package for argument handling.
+﻿using System.Reflection;
 
-using AdventOfCode.Year2015;
+using Autofac;
 
-int.TryParse(args[0], out int year);
-int.TryParse(args[1], out int day);
+// TODO: Implement snazzy System.CommandLine package for argument handling.
+var builder = new ContainerBuilder();
 
-Console.WriteLine($"Helping Santa on {year}.12.{day}...\r\n");
+builder.RegisterAssemblyTypes(typeof(ISolution).GetTypeInfo().Assembly)
+    .Named(t => t.FullName, typeof(ISolution));
 
-var input = SolutionBase.LoadInput(year, day);
+var container = builder.Build();
 
-if (input.Length > 0)
+ ExecuteSolution(container, args);
+
+static void ExecuteSolution(IContainer container, string[] args)
 {
-    // TODO: Dependency injection based on year-day input combo (named instances)
-    var solution = new Day03Solution();
-    var part1Solution = solution.SolvePart1(input);
-    var part2Solution = solution.SolvePart2(input);
+    int.TryParse(args[0], out int year);
+    int.TryParse(args[1], out int day);
+    var input = InputHandler.LoadInput(year, day);
 
-    Console.WriteLine($"Part 1 solution: {part1Solution}");
-    Console.WriteLine($"Part 2 solution: {part2Solution}");
-}
-else {
-    Console.WriteLine("\r\nNo input detected. Hurry and save Christmas!");
+    var solution = container.ResolveNamed<ISolution>($"AdventOfCode.Year{year}.Day{day.ToString("D2")}Solution");
+
+    if (!string.IsNullOrEmpty(input))
+    {
+        Console.WriteLine($"Helping 🎅 save Christmas on {year}-{day.ToString("D2")}... 🦌\r\n");
+        Console.WriteLine($"🌟 Part 1 solution: {solution.SolvePart1(input)}");
+        Console.WriteLine($"🌟 Part 2 solution: {solution.SolvePart2(input)}");
+        Console.WriteLine("\r\n🎄 Christmas is one day closer to being saved! 🎄");
+    }
+    else
+    {
+        Console.WriteLine("\r\nNo input detected. Hurry and save Christmas!");
+    }
 }

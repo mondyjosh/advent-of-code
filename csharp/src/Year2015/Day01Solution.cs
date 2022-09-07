@@ -1,10 +1,10 @@
 namespace AdventOfCode.Year2015;
 
-class Day01Solution : SolutionBase
+class Day01Solution : ISolution
 {
-    public override int SolvePart1(string input) => GetFloor(input);
+    public int SolvePart1(string input) => GetFloor(input);
 
-    public override int SolvePart2(string input) => GetBasementEntryCharacterPosition(input);
+    public int SolvePart2(string input) => GetBasementEntryCharacterPosition(input);
 
     private static int GetFloor(string input)
     {        
