@@ -7,7 +7,7 @@ var builder = new ContainerBuilder();
 
 // TODO: Don't rely on possibly null-reference returned t.FullName.
 builder.RegisterAssemblyTypes(typeof(ISolution).GetTypeInfo().Assembly)
-    .Named(t => t.FullName, typeof(ISolution));
+    .Named(t => t.Name, typeof(ISolution));
 
 var container = builder.Build();
 
@@ -19,7 +19,7 @@ static void ExecuteSolution(IContainer container, string[] args)
     int.TryParse(args[1], out int day);
     var input = InputHandler.LoadInput(year, day);
 
-    var solution = container.ResolveNamed<ISolution>($"AdventOfCode.Year{year}.Day{day.ToString("D2")}Solution");
+    var solution = container.ResolveNamed<ISolution>($"Year{year}Day{day.ToString("D2")}Solution");
 
     if (!string.IsNullOrEmpty(input))
     {

@@ -7,7 +7,7 @@ public class Day02SolutionTests
 {
     public Day02SolutionTests()
     {
-        _solution = new Day02Solution();
+        _solution = new Year2015Day02();
     }
 
     [Theory]
