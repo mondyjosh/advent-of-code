@@ -3,11 +3,11 @@ namespace AdventOfCode.Tests.Year2015;
 using AdventOfCode.Common;
 using AdventOfCode.Year2015;
 
-public class Day02SolutionTests
+public class Year2015Day02SolutionTests
 {
-    public Day02SolutionTests()
+    public Year2015Day02SolutionTests()
     {
-        _solution = new Year2015Day02();
+        _solution = new Year2015Day02Solution();
     }
 
     [Theory]

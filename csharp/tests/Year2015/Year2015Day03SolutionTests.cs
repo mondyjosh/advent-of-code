@@ -3,9 +3,9 @@ namespace AdventOfCode.Tests.Year2015;
 using AdventOfCode.Common;
 using AdventOfCode.Year2015;
 
-public class Day03SolutionTests
+public class Year2015Day03SolutionTests
 {
-    public Day03SolutionTests()
+    public Year2015Day03SolutionTests()
     {
         _solution = new Year2015Day03Solution();
     }

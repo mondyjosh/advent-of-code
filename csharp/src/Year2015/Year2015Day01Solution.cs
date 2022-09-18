@@ -1,6 +1,6 @@
 namespace AdventOfCode.Year2015;
 
-class Year20115Day01Solution : ISolution
+class Year2015Day01Solution : ISolution
 {
     public int SolvePart1(string input) => GetFloor(input);
 
