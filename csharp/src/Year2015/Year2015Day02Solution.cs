@@ -2,7 +2,7 @@ namespace AdventOfCode.Year2015;
 
 using System.Linq;
 
-class Year2015Day02 : ISolution
+class Year2015Day02Solution : ISolution
 {
     public int SolvePart1(string input) => CalculateTotalWrappingPaperArea(input);
 
