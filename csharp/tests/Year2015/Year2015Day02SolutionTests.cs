@@ -3,6 +3,8 @@ namespace AdventOfCode.Tests.Year2015;
 using AdventOfCode.Common;
 using AdventOfCode.Year2015;
 
+[Trait("Year", "2015")]
+[Trait("Day", "02")]
 public class Year2015Day02SolutionTests
 {
     public Year2015Day02SolutionTests()

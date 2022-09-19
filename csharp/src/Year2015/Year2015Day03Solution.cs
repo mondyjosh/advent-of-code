@@ -28,8 +28,6 @@ class Year2015Day03Solution : ISolution
         return locationsVisited.Distinct().Count();
     }
 
-
-
     private static int GetSantaPlusRoboSantaHousesVisited(string input)
     {
         var directions = input.ToCharArray();
