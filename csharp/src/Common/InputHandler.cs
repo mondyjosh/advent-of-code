@@ -1,6 +1,5 @@
 namespace AdventOfCode.Common;
 
-using System.Reflection;
 using Microsoft.Extensions.Configuration;
 
 public static class InputHandler
@@ -20,10 +19,10 @@ public static class InputHandler
 
         try
         {
-            if (!File.Exists(filePath))
-                // Working directory is already at sln level
-                // Move up one directory.
-                filePath = filePath.Replace("../..", "..");
+            // if (!File.Exists(filePath))
+            //     // Working directory is already at sln level
+            //     // Move up one directory.
+            //     filePath = filePath.Replace("../..", "..");
 
             using (var streamReader = new StreamReader(filePath))
                 return streamReader.ReadToEnd();
