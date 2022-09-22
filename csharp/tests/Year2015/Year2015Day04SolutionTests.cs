@@ -13,35 +13,34 @@ public class Year2015Day04SolutionTests
     }
 
     [Theory]
-    [MemberData(nameof(GetMD5Keys))]
-    public void SolvePart1_WithMemberData_OutputExpectedHouseCount(string input, int expected)
+    [MemberData(nameof(GetMD5KeysWithFiveZeroes))]
+    public void SolvePart1_WithMemberData_OutputExpectedZeroHashIndex(string input, int expected)
     {
         var actual = _solution.SolvePart1(input);
 
         Assert.Equal(expected, actual);
     }
 
-    // [Theory]
-    // [MemberData(nameof(GetSantaPlusRoboSantaDirections))]
-    // public void SolvePart2_WithMemberData_OutputExpectedHouseCount(string input, int expected)
-    // {
-    //     // var actual = _solution.SolvePart2(input);
+    [Theory]
+    [MemberData(nameof(GetMD5KeysWithSixZeroes))]
+    public void SolvePart2_WithMemberData_OutputExpectedZeroHashIndex(string input, int expected)
+    {
+        var actual = _solution.SolvePart2(input);
 
-    //     // Assert.Equal(expected, actual);
-    // }
+        Assert.Equal(expected, actual);
+    }
 
-    public static IEnumerable<object[]> GetMD5Keys()
+    public static IEnumerable<object[]> GetMD5KeysWithFiveZeroes()
     {
         yield return new object[] { "abcdef", 609043 };
         yield return new object[] { "pqrstuv", 1048970 };
     }
 
-    //     public static IEnumerable<object[]> GetSantaPlusRoboSantaDirections()
-    // {
-    //     yield return new object[] { "^v", 3 };
-    //     yield return new object[] { "^>v<", 3 };
-    //     yield return new object[] { "^v^v^v^v^v", 11 };
-    // }
+    public static IEnumerable<object[]> GetMD5KeysWithSixZeroes()
+    {
+        yield return new object[] { "abcdef", 6742839 };
+        yield return new object[] { "pqrstuv",  5714438 };
+    }
 
     private readonly ISolution _solution;
 }
