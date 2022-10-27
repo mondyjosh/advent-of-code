@@ -13,7 +13,7 @@ public class Year2015Day02SolutionTests
     }
 
     [Theory]
-    [MemberData(nameof(GetWrappingPaperDimensions))]
+    [MemberData(nameof(GetPart1DemoInputs))]
     public void SolvePart1_WithMemberData_OutputExpectedTotalArea(string input, int expected)
     {
         var actual = _solution.SolvePart1(input);
@@ -22,7 +22,7 @@ public class Year2015Day02SolutionTests
     }
 
     [Theory]
-    [MemberData(nameof(GetRibbonLengths))]
+    [MemberData(nameof(GetPart2DemoInputs))]
     public void SolvePart2_WithMemberData_OutputExpectedTotalLength(string input, int expected)
     {
         var actual = _solution.SolvePart2(input);
@@ -30,7 +30,7 @@ public class Year2015Day02SolutionTests
         Assert.Equal(expected, actual);
     }
 
-    public static IEnumerable<object[]> GetWrappingPaperDimensions()
+    public static IEnumerable<object[]> GetPart1DemoInputs()
     {
         yield return new object[] { "2x3x4", 58 };
         yield return new object[] { "1x1x10", 43 };
@@ -38,7 +38,7 @@ public class Year2015Day02SolutionTests
         yield return new object[] { "1x1x10\n1x1x10", 86 };
     }
 
-    public static IEnumerable<object[]> GetRibbonLengths()
+    public static IEnumerable<object[]> GetPart2DemoInputs()
     {
         yield return new object[] { "2x3x4", 34 };
         yield return new object[] { "1x1x10", 14 };

@@ -13,7 +13,7 @@ public class Year2015Day01SolutionTests
     }
 
     [Theory]
-    [MemberData(nameof(GetFloors))]
+    [MemberData(nameof(GetPart1DemoInputs))]
     public void SolvePart1_WithMemberData_OutputExpectedFloor(string input, int expected)
     {        
         var actual = _solution.SolvePart1(input);        
@@ -22,7 +22,7 @@ public class Year2015Day01SolutionTests
     }
 
     [Theory]
-    [MemberData(nameof(GetBasementEntryCharacterPosition))]
+    [MemberData(nameof(GetPart2DemoInputs))]
     public void SolvePart2_WithMemberData_OutputExpectedBasementEntryCharacterPosition(string input, int expected)
     {
         var actual = _solution.SolvePart2(input);
@@ -30,7 +30,7 @@ public class Year2015Day01SolutionTests
         Assert.Equal(expected, actual);
     }
 
-    public static IEnumerable<object[]> GetFloors()
+    public static IEnumerable<object[]> GetPart1DemoInputs()
     {
         yield return new object[] { "(())", 0 };
         yield return new object[] { "()()", 0 };
@@ -43,7 +43,7 @@ public class Year2015Day01SolutionTests
         yield return new object[] { ")())())", -3 };
     }
 
-    public static IEnumerable<object[]> GetBasementEntryCharacterPosition()
+    public static IEnumerable<object[]> GetPart2DemoInputs()
     {
         yield return new object[] { ")", 1 };
         yield return new object[] { "()())", 5 };
