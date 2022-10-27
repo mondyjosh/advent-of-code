@@ -25,9 +25,9 @@ public class Year2015Day05SolutionTests
     [MemberData(nameof(GetPart2DemoInputs))]    
     public void SolvePart2_WithMemberData_OutputExpectedNiceCount(string input, int expected)
     {
-        // var actual = _solution.SolvePart2(input);
+        var actual = _solution.SolvePart2(input);
 
-        Assert.Equal(1, 1);
+        Assert.Equal(expected, actual);
     }
 
     public static IEnumerable<object[]> GetPart1DemoInputs()

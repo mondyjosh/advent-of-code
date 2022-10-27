@@ -1,5 +1,7 @@
 namespace AdventOfCode.Year2015;
 
+using AdventOfCode.Year2015.Day03;
+
 class Year2015Day03Solution : ISolution
 {
     public int SolvePart1(string input) => GetSantaHousesVisited(input);
@@ -95,16 +97,4 @@ class Year2015Day03Solution : ISolution
     const char South = 'v';
     const char East = '>';
     const char West = '<';
-}
-
-struct Coordinates
-{
-    public Coordinates(int x, int y)
-    {
-        X = x;
-        Y = y;
-    }
-
-    public int X { get; set; }
-    public int Y { get; set; }
 }
