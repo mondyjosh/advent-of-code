@@ -13,7 +13,7 @@ public class Year2015Day05SolutionTests
     }
 
     [Theory]
-    [MemberData(nameof(GetPart1DemoInputs))]    
+    [MemberData(nameof(GetPart1DemoInputs))]
     public void SolvePart1_WithMemberData_OutputExpectedNiceCount(string input, int expected)
     {
         var actual = _solution.SolvePart1(input);
@@ -22,7 +22,7 @@ public class Year2015Day05SolutionTests
     }
 
     [Theory]
-    [MemberData(nameof(GetPart2DemoInputs))]    
+    [MemberData(nameof(GetPart2DemoInputs))]
     public void SolvePart2_WithMemberData_OutputExpectedNiceCount(string input, int expected)
     {
         var actual = _solution.SolvePart2(input);
@@ -36,10 +36,10 @@ public class Year2015Day05SolutionTests
         yield return new object[] { "aaa", 1 };
         yield return new object[] { "jchzalrnumimnmhp", 0 };
         yield return new object[] { "haegwjzuvuyypxyu", 0 };
-        yield return new object[] { "dvszwmarrgswjxmb", 0 };        
+        yield return new object[] { "dvszwmarrgswjxmb", 0 };
     }
 
-        public static IEnumerable<object[]> GetPart2DemoInputs()
+    public static IEnumerable<object[]> GetPart2DemoInputs()
     {
         yield return new object[] { "qjhvhtzxzqqjkmpb", 1 };
         yield return new object[] { "xxyxx", 1 };
