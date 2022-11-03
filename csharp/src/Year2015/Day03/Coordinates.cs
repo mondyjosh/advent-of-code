@@ -1,8 +1,8 @@
 namespace AdventOfCode.Year2015.Day03;
 
-struct Coordinates
+public struct Coordinates
 {
-    public Coordinates(int x, int y)
+    public Coordinates(int x = 0, int y = 0)
     {
         X = x;
         Y = y;

@@ -4,12 +4,12 @@ using AdventOfCode.Common;
 using AdventOfCode.Year2015;
 
 [Trait("Year", "2015")]
-[Trait("Day", "05")]
-public class Year2015Day05SolutionTests
+[Trait("Day", "06")]
+public class Year2015Day06SolutionTests
 {
-    public Year2015Day05SolutionTests()
+    public Year2015Day06SolutionTests()
     {
-        _solution = new Year2015Day05Solution();
+        _solution = new Year2015Day06Solution();
     }
 
     [Theory]
@@ -32,19 +32,16 @@ public class Year2015Day05SolutionTests
 
     public static IEnumerable<object[]> GetPart1DemoInputs()
     {
-        yield return new object[] { "ugknbfddgicrmopn", 1 };
-        yield return new object[] { "aaa", 1 };
-        yield return new object[] { "jchzalrnumimnmhp", 0 };
-        yield return new object[] { "haegwjzuvuyypxyu", 0 };
-        yield return new object[] { "dvszwmarrgswjxmb", 0 };
+        yield return new object[] { "turn on 0,0 through 2,2", 9 };
+        yield return new object[] { "turn on 0,0 through 999,999", 1000000 };
+        yield return new object[] { "toggle 0,0 through 999,0", 1000 };
+        yield return new object[] { "turn off 499,499 through 500,500", 0 };
     }
 
     public static IEnumerable<object[]> GetPart2DemoInputs()
     {
-        yield return new object[] { "qjhvhtzxzqqjkmpb", 1 };
-        yield return new object[] { "xxyxx", 1 };
-        yield return new object[] { "uurcxstgmygtbstg", 0 };
-        yield return new object[] { "ieodomkazucvgmuy", 0 };
+        yield return new object[] { "turn on 0,0 through 0,0", 1 };
+        yield return new object[] { "toggle 0,0 through 999,999", 2000000 };
     }
 
     private readonly ISolution _solution;
