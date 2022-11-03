@@ -21,14 +21,14 @@ public class Year2015Day06SolutionTests
         Assert.Equal(expected, actual);
     }
 
-    // [Theory]
-    // [MemberData(nameof(GetPart2DemoInputs))]
-    // public void SolvePart2_WithMemberData_OutputExpectedNiceCount(string input, int expected)
-    // {
-    //     var actual = _solution.SolvePart2(input);
+    [Theory]
+    [MemberData(nameof(GetPart2DemoInputs))]
+    public void SolvePart2_WithMemberData_OutputExpectedNiceCount(string input, int expected)
+    {
+        var actual = _solution.SolvePart2(input);
 
-    //     Assert.Equal(expected, actual);
-    // }
+        Assert.Equal(expected, actual);
+    }
 
     public static IEnumerable<object[]> GetPart1DemoInputs()
     {
@@ -38,12 +38,11 @@ public class Year2015Day06SolutionTests
         yield return new object[] { "turn off 499,499 through 500,500", 0 };
     }
 
-    // public static IEnumerable<object[]> GetPart2DemoInputs()
-    // {
-        // yield return new object[] { "turn on 0,0 through 999,999", "???" };
-        // yield return new object[] { "toggle 0,0 through 999,0", "???" };
-        // yield return new object[] { "turn off 499,499 through 500,500", "???" };
-    // }
+    public static IEnumerable<object[]> GetPart2DemoInputs()
+    {
+        yield return new object[] { "turn on 0,0 through 0,0", 1 };
+        yield return new object[] { "toggle 0,0 through 999,999", 2000000 };
+    }
 
     private readonly ISolution _solution;
 }

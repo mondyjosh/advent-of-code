@@ -2,7 +2,10 @@ namespace AdventOfCode.Year2015.Day06;
 
 public enum LightActions
 {
-    TurnOnLight,
+    DecreaseBrightnessByOne,
+    IncreaseBrightnessByOne,
+    IncreaseBrightnessByTwo,
+    ToggleLight,
     TurnOffLight,
-    ToggleLight
+    TurnOnLight
 }
