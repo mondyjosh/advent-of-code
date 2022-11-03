@@ -1,4 +1,4 @@
-namespace AdventOfCode.Year2015.Common;
+namespace AdventOfCode.Year2015.Day03;
 
 public struct Coordinates
 {

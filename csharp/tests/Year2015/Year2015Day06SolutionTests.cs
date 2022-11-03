@@ -32,9 +32,10 @@ public class Year2015Day06SolutionTests
 
     public static IEnumerable<object[]> GetPart1DemoInputs()
     {
+        yield return new object[] { "turn on 0,0 through 2,2", 9 };
         yield return new object[] { "turn on 0,0 through 999,999", 1000000 };
         yield return new object[] { "toggle 0,0 through 999,0", 1000 };
-        yield return new object[] { "turn off 499,499 through 500,500", 100 };
+        yield return new object[] { "turn off 499,499 through 500,500", 0 };
     }
 
     // public static IEnumerable<object[]> GetPart2DemoInputs()

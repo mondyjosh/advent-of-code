@@ -1,6 +1,6 @@
 namespace AdventOfCode.Year2015;
 
-using AdventOfCode.Year2015.Common;
+using AdventOfCode.Year2015.Day03;
 
 class Year2015Day03Solution : ISolution
 {
