@@ -8,12 +8,14 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  working-directory: ./rust
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    
+    defaults:
+      run:        
+        working-directory: ./rust
 
     steps:
     - uses: actions/checkout@v3
