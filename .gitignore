@@ -4,7 +4,7 @@ bin/
 obj/
 
 ### Rust ###
-/target
+rust/target
 
 # Common node modules locations
 /node_modules
