@@ -3,12 +3,15 @@
 bin/
 obj/
 
+### Rust ###
+rust/target
+
 # Common node modules locations
 /node_modules
 /wwwroot/node_modules
 
 ### VisualStudioCode ###
-.vscode/*
+.vscode/
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
