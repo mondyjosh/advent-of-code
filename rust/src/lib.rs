@@ -1,19 +1,22 @@
 // use std::env;
 use std::error::Error;
 use std::fs;
+use std::path::PathBuf;
 
-pub struct Config {
+use config::Config;
+
+pub struct AocConfig {
     pub year: String,
     pub day: String,
     pub file_path: String,
 }
 
-impl Config {
-    pub fn build(mut args: impl Iterator<Item = String>) -> Result<Config, &'static str> {
+impl AocConfig {
+    pub fn build(mut args: impl Iterator<Item = String>) -> Result<AocConfig, &'static str> {
         // ignore arg[0] (binary name)
         args.next();
 
-        // TODO: Parse Year and Day as integers
+        // TODO: Check if Year and Day are integers
         let year = match args.next() {
             Some(arg) => arg,
             None => return Err("Didn't get a year"),
@@ -24,18 +27,17 @@ impl Config {
             None => return Err("Didn't get a day"),
         };
 
-        // TODO: Determine a more idiomatic way to assemble Config.file_path
-        let foo = String::from("../docs/year{year}/inputs/day{day}_input.txt");
-        let bar = foo.replace("{year}", &year);
-        let file_path = bar.replace("{day}", &day);
+        let config = Config::builder()
+            .add_source(config::File::from(PathBuf::from("./Settings")))
+            .build()
+            .unwrap();
 
-        // if !Path::new(file_path).exists() {
-        //     return Err("File doesn't exist")
-        // }
+        let template = &config.get::<String>("input_file_path_template").unwrap();
+        let file_path = template.replace("{year}", &year).replace("{day}", &day);
 
         // TODO: Specify which year+day solution to use and set in Config
 
-        Ok(Config {
+        Ok(AocConfig {
             year,
             day,
             file_path,
@@ -43,8 +45,7 @@ impl Config {
     }
 }
 
-pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
-    
+pub fn run(config: AocConfig) -> Result<(), Box<dyn Error>> {
     // TODO: Include filename in error if missing
     let contents = fs::read_to_string(config.file_path)?;
 

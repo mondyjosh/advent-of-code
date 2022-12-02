@@ -1,0 +1,1 @@
+input_file_path_template = "../docs/year{year}/inputs/day{day}.txt"
