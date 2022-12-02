@@ -1,3 +1,5 @@
+mod solution;
+
 // use std::env;
 use std::error::Error;
 use std::fs;
@@ -50,6 +52,8 @@ pub fn run(config: AocConfig) -> Result<(), Box<dyn Error>> {
     let contents = fs::read_to_string(config.file_path)?;
 
     let results: Vec<&str> = contents.lines().collect();
+
+    // let solution = aoc_year2022_day01::solve_part_1("input");    
 
     // TODO: Add solution runner harness
     // let results = if config.ignore_case {
