@@ -4,6 +4,7 @@ use std::process;
 use aoc::AocConfig;
 
 fn main() {
+    // TODO: fun console hello message
     let config = AocConfig::build(env::args()).unwrap_or_else(|err| {
         eprintln!("Problem parsing arguments: {err}");
         process::exit(1);

@@ -3,12 +3,11 @@ use std::fs;
 use std::path::PathBuf;
 
 use config::Config;
-use solution::Solution;
-// use crate::gui::html_gui::HtmlDialog;
-// use crate::gui::windows_gui::WindowsDialog;
+use solutions::Solution;
 
-mod solution;
+mod solutions;
 
+// TODO: Better name
 pub struct AocConfig {
     pub year: u32,
     pub day: u32,
@@ -17,7 +16,7 @@ pub struct AocConfig {
 
 impl AocConfig {
     pub fn build(mut args: impl Iterator<Item = String>) -> Result<AocConfig, &'static str> {
-        // ignore arg[0] (binary name)
+        // Ignore arg[0] (binary name)
         args.next();
 
         let year = match args.next() {
@@ -57,47 +56,23 @@ fn build_input_file_path(year: u32, day: u32) -> String {
 
 pub fn run(config: AocConfig) -> Result<(), Box<dyn Error>> {
     let contents = fs::read_to_string(config.input_file_path)?;
+    
+    // TODO: Better error message
+    let solution = match solutions::get_solution(config.year, config.day) {
+        Some(s) => s,
+        None => todo!(),
+    };
+    
+    // TODO: Emoji decorations
+    println!("Running: {} ", solution.name());
+
+    // TODO: Move contents.lines().collect() to solve_part_x; 
+    //       let each sln handle its own input as it needs to
     let results: Vec<&str> = contents.lines().collect();
-
-    // for result in results {
-    //     println!("{}", result);
-    // }
-
     println!("results length: {}", results.len());
 
-    let solution = solution::get_solution(config.year, config.day);
+    println!("Part 1: {}", solution.solve_part_1(String::from("input")));
+    println!("Part 2: {}", solution.solve_part_2(String::from("input")));
 
-    // println!("Running: {} ", solution.name());
-
-    // println!("Part 1: {}", solution.solve_part_1(String::from("input")));
-    // println!("Part 2: {}", solution.solve_part_2(String::from("input")));
-
-    // -------------------------------------------------------------------------
-    // let dialog = initialize();
-
-    // dialog.render();
-    // dialog.refresh();
-    // -------------------------------------------------------------------------
-    
     Ok(())
 }
-
-// --------------------------------------------------------
-// use crate::gui::Dialog;
-// use crate::gui::html_gui::HtmlDialog;
-// use crate::gui::windows_gui::WindowsDialog;
-
-// mod gui;
-
-// pub fn initialize() -> &'static dyn Dialog {
-//     let cfg_windows = false;
-
-//     // The dialog type is selected depending on the environment settings or configuration.
-//     if cfg_windows {
-//         println!("-- Windows detected, creating Windows GUI --");
-//         &WindowsDialog
-//     } else {
-//         println!("-- No OS detected, creating the HTML GUI --");
-//         &HtmlDialog
-//     }
-// }
