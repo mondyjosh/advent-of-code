@@ -1,17 +1,17 @@
 use crate::solution::Solution;
 
-pub struct Day01;
+pub struct Day04;
 
-impl Solution for Day01 {
+impl Solution for Day04 {
     fn name(&self) -> &'static str {
-        "Calorie Counting"
+        "2023 Day 04"
     }
 
     fn solve_part_1(&self, input: String) -> i32 {
-        20220101
+        20220401
     }
 
     fn solve_part_2(&self, input: String) -> i32 {
-        20220102
+        20220402
     }
 }

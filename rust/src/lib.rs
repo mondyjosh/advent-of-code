@@ -3,15 +3,16 @@ use std::fs;
 use std::path::PathBuf;
 
 use config::Config;
+use solution::Solution;
+// use crate::gui::html_gui::HtmlDialog;
+// use crate::gui::windows_gui::WindowsDialog;
 
-use problem::Solution;
-mod problem;
-mod solutions;
+mod solution;
 
 pub struct AocConfig {
     pub year: u32,
     pub day: u32,
-    pub file_path: String,
+    pub input_file_path: String,
 }
 
 impl AocConfig {
@@ -19,7 +20,6 @@ impl AocConfig {
         // ignore arg[0] (binary name)
         args.next();
 
-        // TODO: Check if Year and Day are integers
         let year = match args.next() {
             Some(arg) => arg.parse::<u32>().unwrap(),
             None => return Err("Didn't get a year"),
@@ -30,59 +30,74 @@ impl AocConfig {
             None => return Err("Didn't get a day"),
         };
 
-        let config = Config::builder()
-            .add_source(config::File::from(PathBuf::from("./Settings")))
-            .build()
-            .unwrap();
-
-        // TODO: Improve file_path assembly
-        let template = &config.get::<String>("input_file_path_template").unwrap();
-        let year_string = format!("{:04}", &year);
-        let day_string = format!("{:02}", &day);
-        let file_path = template
-            .replace("{year}", &year_string)
-            .replace("{day}", &day_string);
-
-        // TODO: Improve/understand Solution selector
-        let solutions = solutions::get_year(year);
-        let solution = match solutions.get(day as usize) {
-            Some(s) => s,
-            None => {
-                // TODO: Include day and year in Err
-                return Err("No solution for day-year combo");
-            }
-        };
-
-        // TODO: move solution outside lifetime of build
-        let part_one = solution.solve_part_1(String::from("input"));
-        let part_two = solution.solve_part_2(String::from("input"));
-
-        println!("Part 1: {}", part_one);
-        println!("Part 2: {}", part_two);
+        let input_file_path = build_input_file_path(year, day);
 
         Ok(AocConfig {
             year,
             day,
-            file_path,
+            input_file_path,
         })
     }
 }
 
-pub fn run(config: AocConfig) -> Result<(), Box<dyn Error>> {    
-    // println!("[*] Running: {} ", solution.name());
+fn build_input_file_path(year: u32, day: u32) -> String {
+    let config = Config::builder()
+        .add_source(config::File::from(PathBuf::from("./Settings")))
+        .build()
+        .unwrap();
 
-    // TODO: Include filename in error if missing
-    let contents = fs::read_to_string(config.file_path)?;
+    let template = &config.get::<String>("input_file_path_template").unwrap();
 
+    let input_file_path = template
+        .replace("{year}", format!("{:04}", &year).as_str())
+        .replace("{day}", format!("{:02}", &day).as_str());
+
+    input_file_path
+}
+
+pub fn run(config: AocConfig) -> Result<(), Box<dyn Error>> {
+    let contents = fs::read_to_string(config.input_file_path)?;
     let results: Vec<&str> = contents.lines().collect();
 
-    // TODO: Add solution runner harness
-    // solution.solve_part_1(contents);
-
-    // TODO: Remove once the runner harness is implemented
-    // for line in results {
-    //     println!("{line}");
+    // for result in results {
+    //     println!("{}", result);
     // }
 
+    println!("results length: {}", results.len());
+
+    let solution = solution::get_solution(config.year, config.day);
+
+    // println!("Running: {} ", solution.name());
+
+    // println!("Part 1: {}", solution.solve_part_1(String::from("input")));
+    // println!("Part 2: {}", solution.solve_part_2(String::from("input")));
+
+    // -------------------------------------------------------------------------
+    // let dialog = initialize();
+
+    // dialog.render();
+    // dialog.refresh();
+    // -------------------------------------------------------------------------
+    
     Ok(())
 }
+
+// --------------------------------------------------------
+// use crate::gui::Dialog;
+// use crate::gui::html_gui::HtmlDialog;
+// use crate::gui::windows_gui::WindowsDialog;
+
+// mod gui;
+
+// pub fn initialize() -> &'static dyn Dialog {
+//     let cfg_windows = false;
+
+//     // The dialog type is selected depending on the environment settings or configuration.
+//     if cfg_windows {
+//         println!("-- Windows detected, creating Windows GUI --");
+//         &WindowsDialog
+//     } else {
+//         println!("-- No OS detected, creating the HTML GUI --");
+//         &HtmlDialog
+//     }
+// }
