@@ -1,5 +1,4 @@
 mod year_2022;
-mod year_2023;
 
 pub trait Solution {
     fn name(&self) -> &'static str;
@@ -10,8 +9,7 @@ pub trait Solution {
 pub fn get_solution(year: u32, day: u32) -> Option<&'static &'static dyn Solution> {
     // TODO: Handle throwaway (_)
     let aoc_year: &[&dyn Solution] = match year {
-        2022 => &year_2022::ALL_SOLUTIONS,
-        2023 => &year_2023::ALL_SOLUTIONS,
+        2022 => &year_2022::ALL_SOLUTIONS,        
         _ => todo!(),
     };
 
