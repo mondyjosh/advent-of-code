@@ -55,24 +55,24 @@ fn build_input_file_path(year: u32, day: u32) -> String {
 }
 
 pub fn run(config: AocConfig) -> Result<(), Box<dyn Error>> {
-    let contents = fs::read_to_string(config.input_file_path)?;
-    
-    // TODO: Better error message
+    let input = fs::read_to_string(config.input_file_path)?;
+
+    // TODO: Figure out a non-panic version of this
     let solution = match solutions::get_solution(config.year, config.day) {
         Some(s) => s,
-        None => todo!(),
+        None => panic!("No solution found"),
     };
-    
-    // TODO: Emoji decorations
-    println!("Running: {} ", solution.name());
 
-    // TODO: Move contents.lines().collect() to solve_part_x; 
-    //       let each sln handle its own input as it needs to
-    let results: Vec<&str> = contents.lines().collect();
-    println!("results length: {}", results.len());
+    println!(
+        "🎅 Running {}-{}: {}\r\n",
+        format!("{:04}", &config.year).as_str(),
+        format!("{:02}", &config.day).as_str(),
+        solution.name()
+    );
 
-    println!("Part 1: {}", solution.solve_part_1(String::from("input")));
-    println!("Part 2: {}", solution.solve_part_2(String::from("input")));
+    println!("🌟 Part 1: {}", solution.solve_part_1(&input));
+    println!("🌟 Part 2: {}", solution.solve_part_2(&input));
+    println!("\r\n🎄 Christmas is one day closer to being saved!");
 
     Ok(())
 }
