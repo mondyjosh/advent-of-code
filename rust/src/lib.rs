@@ -7,16 +7,15 @@ use solutions::Solution;
 
 mod solutions;
 
-// TODO: Better name
-pub struct AocConfig {
+pub struct AppConfig {
     pub year: u32,
     pub day: u32,
     pub input_file_path: String,
 }
 
-impl AocConfig {
-    pub fn build(mut args: impl Iterator<Item = String>) -> Result<AocConfig, &'static str> {
-        // Ignore arg[0] (binary name)
+impl AppConfig {
+    pub fn build(mut args: impl Iterator<Item = String>) -> Result<AppConfig, &'static str> {
+        // Don't need arg[0] (binary name)
         args.next();
 
         let year = match args.next() {
@@ -31,7 +30,7 @@ impl AocConfig {
 
         let input_file_path = build_input_file_path(year, day);
 
-        Ok(AocConfig {
+        Ok(AppConfig {
             year,
             day,
             input_file_path,
@@ -54,25 +53,20 @@ fn build_input_file_path(year: u32, day: u32) -> String {
     input_file_path
 }
 
-pub fn run(config: AocConfig) -> Result<(), Box<dyn Error>> {
+pub fn run(config: AppConfig) -> Result<(), Box<dyn Error>> {
+    let solution = solutions::get_solution(&config.year, &config.day)?;
     let input = fs::read_to_string(config.input_file_path)?;
 
-    // TODO: Figure out a non-panic version of this
-    let solution = match solutions::get_solution(config.year, config.day) {
-        Some(s) => s,
-        None => panic!("No solution found"),
-    };
-
     println!(
-        "🎅 Running {}-{}: {}\r\n",
-        format!("{:04}", &config.year).as_str(),
-        format!("{:02}", &config.day).as_str(),
+        "🎁 Rust solution for AOC_{:04}_{:02}: {}\r\n",
+        &config.year,
+        &config.day,
         solution.name()
     );
 
     println!("🌟 Part 1: {}", solution.solve_part_1(&input));
     println!("🌟 Part 2: {}", solution.solve_part_2(&input));
-    println!("\r\n🎄 Christmas is one day closer to being saved!");
+    println!("\r\n🎄 Christmas is one day closer to being saved! 🎄");
 
     Ok(())
 }

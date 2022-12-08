@@ -6,13 +6,16 @@ pub trait Solution {
     fn solve_part_2(&self, input: &str) -> i32;
 }
 
-pub fn get_solution(year: u32, day: u32) -> Option<&'static &'static dyn Solution> {
-    // TODO: Handle throwaway (_)
+pub fn get_solution(year: &u32, day: &u32) -> Result<&'static &'static dyn Solution, &'static str> {
     let aoc_year: &[&dyn Solution] = match year {
-        2022 => &year_2022::ALL_SOLUTIONS,        
-        _ => todo!(),
+        2022 => &year_2022::ALL_SOLUTIONS,
+        _ => return Err("Unsupported year for AOC Rust solutions"),
     };
 
-    // Adjust to zero-index
-    aoc_year.get((day - 1) as usize)
+    let solution = match aoc_year.get((day - 1) as usize) {
+        Some(sln) => sln,
+        None => return Err("Didn't find an AOC Rust solution"),
+    };
+
+    Ok(solution)
 }
