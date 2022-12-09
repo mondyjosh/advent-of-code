@@ -1,11 +1,11 @@
 use std::env;
 use std::process;
 
-use aoc::AocConfig;
+use aoc::AppConfig;
 
 fn main() {
-    let config = AocConfig::build(env::args()).unwrap_or_else(|err| {
-        eprintln!("Problem parsing arguments: {err}");
+    let config = AppConfig::build(env::args()).unwrap_or_else(|err| {
+        eprintln!("Error configuring application: {err}");
         process::exit(1);
     });
 
