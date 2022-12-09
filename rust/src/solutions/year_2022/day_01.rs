@@ -8,7 +8,7 @@ impl Solution for Day01 {
     }
 
     fn solve_part_one(&self, input: &str) -> i32 {
-        let elves = build_elves(&input);
+        let elves = build_elves(input);
 
         let max = elves
             .iter()
@@ -27,6 +27,7 @@ impl Solution for Day01 {
 // POSSIBLE_TODO: reimplementation with functional equivalent?
 fn build_elves(input: &str) -> Vec<Elf> {
     let lines: Vec<&str> = input.lines().collect();
+    
     let mut elves: Vec<Elf> = vec![Elf {
         food_items: Vec::new(),
     }];
