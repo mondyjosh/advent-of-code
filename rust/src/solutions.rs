@@ -2,8 +2,8 @@ mod year_2022;
 
 pub trait Solution {
     fn name(&self) -> &'static str;
-    fn solve_part_1(&self, input: &str) -> i32;
-    fn solve_part_2(&self, input: &str) -> i32;
+    fn solve_part_one(&self, input: &str) -> i32;
+    fn solve_part_two(&self, input: &str) -> i32;
 }
 
 pub fn get_solution(year: &u32, day: &u32) -> Result<&'static &'static dyn Solution, &'static str> {

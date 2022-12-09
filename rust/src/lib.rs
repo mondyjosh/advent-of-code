@@ -64,8 +64,8 @@ pub fn run(config: AppConfig) -> Result<(), Box<dyn Error>> {
         solution.name()
     );
 
-    println!("🌟 Part 1: {}", solution.solve_part_1(&input));
-    println!("🌟 Part 2: {}", solution.solve_part_2(&input));
+    println!("🌟 Part 1: {}", solution.solve_part_one(&input));
+    println!("🌟 Part 2: {}", solution.solve_part_two(&input));
     println!("\r\n🎄 Christmas is one day closer to being saved! 🎄");
 
     Ok(())
